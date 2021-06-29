@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 600px;
+  background-color: grey;
+  color: white;
+  justify-content: center;
+  align-items: center;
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+}
