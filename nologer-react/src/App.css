@@ -5,6 +5,23 @@
   box-sizing: border-box;
 }
 
+button {
+  background-color: grey;
+  height: 60px;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 4px 6px black;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: fuchsia;
+}
+
 
 .student-container {
   display: flex;

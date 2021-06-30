@@ -4,6 +4,12 @@
   height: 100px;
   align-items: center;
   padding: 30px;
+  justify-content: space-between;
+
+  .buttonContainer {
+    display: flex;
+    gap: 20px;
+  }
 }
 
 .heading {

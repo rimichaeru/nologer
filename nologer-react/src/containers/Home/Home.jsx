@@ -13,11 +13,20 @@ const Home = (props) => {
   useEffect(() => {
     if (props.allStudents) {
       const renderList = props.allStudents.map((student, index) => {
-        return <StudentCard name={student.firstName} onClick={() => history.push(`${index}`)} />;
+        return <StudentCard key={student.id+student.firstName} name={student.firstName} studentId={student.id} onClick={() => history.push(`${index}`)} setUpdateStudents={props.setUpdateStudents} updateStudents={props.updateStudents} />;
       });
       setRenderGrid(renderList);
     }
   }, [props.allStudents]);
+
+  useEffect(() => {
+    if (props.allStudents) {
+      const renderList = props.allStudents.map((student, index) => {
+        return <StudentCard key={student.id+student.firstName} name={student.firstName} studentId={student.id} onClick={() => history.push(`${index}`)} setUpdateStudents={props.setUpdateStudents} updateStudents={props.updateStudents} />;
+      });
+      setRenderGrid(renderList);
+    }
+  }, []);
 
 
   return (

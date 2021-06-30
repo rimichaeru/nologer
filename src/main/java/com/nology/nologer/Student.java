@@ -2,18 +2,28 @@ package com.nology.nologer;
 
 public class Student {
 
+    private int id;
     private String firstName;
     private String lastName;
     private int age;
     private String location;
     private String[] interests;
 
-    public Student(String firstName, String lastName, int age, String location, String[] interests) {
+    public Student(int id, String firstName, String lastName, int age, String location, String[] interests) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.location = location;
         this.interests = interests;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
