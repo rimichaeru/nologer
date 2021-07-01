@@ -3,10 +3,10 @@ import styles from "./CreateStudentForm.module.scss";
 import { useParams } from "react-router-dom";
 
 const CreateStudentForm = (props) => {
+  // const { updateId } = useParams("updateId");
 
-  const { updateId } = useParams("updateId");
-
-  console.log(updateId);
+  // console.log(updateId);
+  const updateId = null;
 
   let newStudent = {
     id: "",
@@ -33,13 +33,14 @@ const CreateStudentForm = (props) => {
         return response.json();
       })
       .then((data) => {
-        props.setUpdateStudents(!props.updateStudents);
         console.log(data);
+        alert(`${newStudent.firstName} has been created`);
+        props.setShowForm(false);
       });
   };
 
   const updateExistingStudent = () => {
-    fetch(`http://localhost:8080/student/${updateId}`, {
+    fetch(`http://localhost:8080/student/${props.formData.id}`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -50,8 +51,9 @@ const CreateStudentForm = (props) => {
         return response.json();
       })
       .then((data) => {
-        props.setUpdateStudents(!props.updateStudents);
         console.log(data);
+        alert(`${newStudent.firstName} has been modified`);
+        props.setShowForm(false);
       });
   };
 
@@ -64,7 +66,7 @@ const CreateStudentForm = (props) => {
           id="firstName"
           placeholder="Enter First Name"
           onBlur={(e) => updateStudent(e.target.name, e.target.value)}
-          defaultValue={updateId ? props.allStudents[updateId].firstName : null}
+          defaultValue={props.formData ? props.formData.firstName : null}
         />
         <input
           type="text"
@@ -72,7 +74,7 @@ const CreateStudentForm = (props) => {
           id="lastName"
           placeholder="Enter Last Name"
           onBlur={(e) => updateStudent(e.target.name, e.target.value)}
-          defaultValue={updateId ? props.allStudents[updateId].lastName : null}
+          defaultValue={props.formData ? props.formData.lastName : null}
         />
         <input
           type="text"
@@ -80,7 +82,7 @@ const CreateStudentForm = (props) => {
           id="age"
           placeholder="Enter Age"
           onBlur={(e) => updateStudent(e.target.name, e.target.value)}
-          defaultValue={updateId ? props.allStudents[updateId].age : null}
+          defaultValue={props.formData ? props.formData.age : null}
         />
         <input
           type="text"
@@ -88,7 +90,7 @@ const CreateStudentForm = (props) => {
           id="location"
           placeholder="Enter Location"
           onBlur={(e) => updateStudent(e.target.name, e.target.value)}
-          defaultValue={updateId ? props.allStudents[updateId].location : null}
+          defaultValue={props.formData ? props.formData.location : null}
         />
         <input
           type="text"
@@ -96,13 +98,17 @@ const CreateStudentForm = (props) => {
           id="interests"
           placeholder="Enter Interests"
           onBlur={(e) => updateStudent(e.target.name, [e.target.value])}
-          defaultValue={updateId ? props.allStudents[updateId].interests : null}
+          defaultValue={props.formData ? props.formData.interests : null}
         />
-        {updateId ? (
-          <button onClick={updateExistingStudent}>Update Details</button>
-        ) : (
-          <button onClick={createStudent}>Add Student to Database</button>
-        )}
+
+        <div className={styles.buttons}>
+          <button onClick={() => props.setShowForm(false)}>Cancel</button>
+          {props.formData ? (
+            <button onClick={updateExistingStudent}>Update Details</button>
+          ) : (
+            <button onClick={createStudent}>Add Student</button>
+          )}
+        </div>
       </div>
     </div>
   );

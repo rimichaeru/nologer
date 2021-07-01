@@ -1,7 +1,6 @@
 * { 
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   box-sizing: border-box;
 }
 
@@ -23,22 +22,6 @@ button:hover {
 }
 
 
-.student-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.student-heading {
-  color: purple;
-  margin: 40px;
-}
-
-.student-card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-}
 
 
 

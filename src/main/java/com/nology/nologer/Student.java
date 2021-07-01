@@ -2,14 +2,14 @@ package com.nology.nologer;
 
 public class Student {
 
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private int age;
     private String location;
     private String[] interests;
 
-    public Student(int id, String firstName, String lastName, int age, String location, String[] interests) {
+    public Student(String id, String firstName, String lastName, int age, String location, String[] interests) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,11 +18,11 @@ public class Student {
         this.interests = interests;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -65,10 +65,6 @@ public class Student {
     public void setInterests(String[] interests) {
         this.interests = interests;
     }
-
-
-
-
 
 
 

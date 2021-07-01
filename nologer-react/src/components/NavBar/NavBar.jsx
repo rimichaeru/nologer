@@ -9,8 +9,8 @@ const NavBar = () => {
     <div className={styles.container}>
       <p className={styles.heading}>_nologer</p>
       <div className={styles.buttonContainer}>
-        <button onClick={() => history.push("/")}>Home</button>
-        <button onClick={() => history.push("/student")}>Add Student</button>
+        <button onClick={() => history.push("/")}>Students</button>
+        <button onClick={() => history.push("/courses")}>Courses</button>
       </div>
     </div>
   );

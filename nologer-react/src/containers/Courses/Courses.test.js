@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Student from "./Student";
+import Courses from "./Courses";
 
-describe("Student tests", () => {
+describe("Courses tests", () => {
   it("should render", () => {
-    expect(render(<Student />)).toBeTruthy();
+    expect(render(<Courses />)).toBeTruthy();
   });
 });

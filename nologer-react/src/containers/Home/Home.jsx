@@ -3,38 +3,61 @@ import styles from "./Home.module.scss";
 import { useEffect, useState } from "react";
 import StudentCard from "../../components/StudentCard";
 import { useHistory } from "react-router-dom";
-
+import CreateStudentForm from "../../components/CreateStudentForm";
 
 const Home = (props) => {
   const [renderGrid, setRenderGrid] = useState([]);
-  
-  let history = useHistory();
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState(null);
+  const [updateRender, setUpdateRender] = useState(true);
+
+  const handleForm = (studentData = null) => {
+    if (!studentData) {
+      setFormData(null);
+      setShowForm(true);
+      return;
+    }
+    setFormData(studentData);
+    setShowForm(true);
+  };
 
   useEffect(() => {
-    if (props.allStudents) {
-      const renderList = props.allStudents.map((student, index) => {
-        return <StudentCard key={student.id+student.firstName} name={student.firstName} studentId={student.id} onClick={() => history.push(`${index}`)} setUpdateStudents={props.setUpdateStudents} updateStudents={props.updateStudents} />;
+    fetch("http://localhost:8080/students")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setRenderGrid(
+          data.map((student) => {
+            return (
+              <StudentCard
+                key={student.id + student.firstName + student.lastName}
+                student={student}
+                updateRender={updateRender}
+                setUpdateRender={setUpdateRender}
+                handleForm={handleForm}
+              />
+            );
+          })
+        );
       });
-      setRenderGrid(renderList);
-    }
-  }, [props.allStudents]);
-
-  useEffect(() => {
-    if (props.allStudents) {
-      const renderList = props.allStudents.map((student, index) => {
-        return <StudentCard key={student.id+student.firstName} name={student.firstName} studentId={student.id} onClick={() => history.push(`${index}`)} setUpdateStudents={props.setUpdateStudents} updateStudents={props.updateStudents} />;
-      });
-      setRenderGrid(renderList);
-    }
-  }, []);
-
+  }, [showForm, updateRender]);
 
   return (
     <div className="App">
-      <div className="student-container">
-        <h1 className="student-heading">Students</h1>
+      <div className={styles.studentContainer}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Students</h1>
+          <button className={styles.addStudent} onClick={handleForm}>
+            Add Student
+          </button>
+        </div>
 
-        <div className="student-card-grid">{renderGrid}</div>
+        {showForm ? (
+          <CreateStudentForm formData={formData} setShowForm={setShowForm} />
+        ) : (
+          <div className={styles.studentGrid}>{renderGrid}</div>
+        )}
       </div>
     </div>
   );
